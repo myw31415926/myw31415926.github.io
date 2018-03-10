@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>C/C++中运算符优先级造成的奇怪错误 | myw31415926&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天在调试代码的时候发现一个很奇怪的地方，代码如下 12345int GetData(int data[], int* num)&amp;#123;	*num++	// other code&amp;#125; GetData 是个获取数据的函数，但却得不到正确的数据，因为 num 始终为0。后来通过gdb调试才发现，">
+  <meta name="description" content="今天在调试代码的时候发现一个很奇怪的地方，代码如下 12345int GetData(int data[], int* num)&amp;#123;    *num++    // other code&amp;#125; GetData 是个获取数据的函数，但却得不到正确的数据，因为 num 始终为0。后来通过gdb">
 <meta name="keywords" content="C&#x2F;C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C&#x2F;C++中运算符优先级造成的奇怪错误">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/operator_priority/index.html">
 <meta property="og:site_name" content="myw31415926&#39;s blog">
-<meta property="og:description" content="今天在调试代码的时候发现一个很奇怪的地方，代码如下 12345int GetData(int data[], int* num)&amp;#123;	*num++	// other code&amp;#125; GetData 是个获取数据的函数，但却得不到正确的数据，因为 num 始终为0。后来通过gdb调试才发现，每一次 1*num++ 后，num的值并未自增1，而是 num 的值增加了4（ int 占4个字">
+<meta property="og:description" content="今天在调试代码的时候发现一个很奇怪的地方，代码如下 12345int GetData(int data[], int* num)&amp;#123;    *num++    // other code&amp;#125; GetData 是个获取数据的函数，但却得不到正确的数据，因为 num 始终为0。后来通过gdb调试才发现，每一次 1*num++ 后，num的值并未自增1，而是 num 的值增加了4（ in">
 <meta property="og:image" content="http://yoursite.com/image/operator_priority.jpg">
-<meta property="og:updated_time" content="2017-12-03T04:17:26.679Z">
+<meta property="og:updated_time" content="2018-03-10T11:48:55.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++中运算符优先级造成的奇怪错误">
-<meta name="twitter:description" content="今天在调试代码的时候发现一个很奇怪的地方，代码如下 12345int GetData(int data[], int* num)&amp;#123;	*num++	// other code&amp;#125; GetData 是个获取数据的函数，但却得不到正确的数据，因为 num 始终为0。后来通过gdb调试才发现，每一次 1*num++ 后，num的值并未自增1，而是 num 的值增加了4（ int 占4个字">
+<meta name="twitter:description" content="今天在调试代码的时候发现一个很奇怪的地方，代码如下 12345int GetData(int data[], int* num)&amp;#123;    *num++    // other code&amp;#125; GetData 是个获取数据的函数，但却得不到正确的数据，因为 num 始终为0。后来通过gdb调试才发现，每一次 1*num++ 后，num的值并未自增1，而是 num 的值增加了4（ in">
 <meta name="twitter:image" content="http://yoursite.com/image/operator_priority.jpg">
   
     <link rel="alternative" href="/atom.xml" title="myw31415926&#39;s blog" type="application/atom+xml">
@@ -195,7 +195,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>今天在调试代码的时候发现一个很奇怪的地方，代码如下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetData</span><span class="params">(<span class="keyword">int</span> data[], <span class="keyword">int</span>* num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	*num++</span><br><span class="line">	<span class="comment">// other code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetData</span><span class="params">(<span class="keyword">int</span> data[], <span class="keyword">int</span>* num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    *num++</span><br><span class="line">    <span class="comment">// other code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>GetData</code> 是个获取数据的函数，但却得不到正确的数据，因为 <code>num</code> 始终为0。后来通过gdb调试才发现，每一次</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*num++</span><br></pre></td></tr></table></figure>
 <p>后，num的值并未自增1，而是 <code>num</code> 的值增加了4（ <strong>int</strong> 占4个字节），原因已经很明显了： <strong>因为 ++ 运算符的优先级高于 * 的优先级 </strong>，将其改为</p>
@@ -471,11 +471,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -487,15 +487,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">book</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
             
             <div class="clearfix"></div>

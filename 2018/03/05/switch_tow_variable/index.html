@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>几种变量互换的方法 | myw31415926&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="几种变量互换的方法以前写过变量交换的程序，当时还记得特别强调过，要使用指针或引用，否则会出错，本文就介绍几种交换的方法。 最简单方法：使用中间变量互换两个变量最简单的方法是使用一个临时的中间变量，代码如下： 1234567void swap(int* x, int* y)&amp;#123;	int tmp;	tmp ">
+  <meta name="description" content="几种变量互换的方法以前写过变量交换的程序，当时还记得特别强调过，要使用指针或引用，否则会出错，本文就介绍几种交换的方法。 最简单方法：使用中间变量互换两个变量最简单的方法是使用一个临时的中间变量，代码如下： 1234567void swap(int* x, int* y)&amp;#123;    int tmp;  ">
 <meta name="keywords" content="C&#x2F;C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="几种变量互换的方法">
 <meta property="og:url" content="http://yoursite.com/2018/03/05/switch_tow_variable/index.html">
 <meta property="og:site_name" content="myw31415926&#39;s blog">
-<meta property="og:description" content="几种变量互换的方法以前写过变量交换的程序，当时还记得特别强调过，要使用指针或引用，否则会出错，本文就介绍几种交换的方法。 最简单方法：使用中间变量互换两个变量最简单的方法是使用一个临时的中间变量，代码如下： 1234567void swap(int* x, int* y)&amp;#123;	int tmp;	tmp = *x;	*x  = *y;	*y  = tmp;&amp;#125;">
-<meta property="og:updated_time" content="2018-03-05T15:54:33.687Z">
+<meta property="og:description" content="几种变量互换的方法以前写过变量交换的程序，当时还记得特别强调过，要使用指针或引用，否则会出错，本文就介绍几种交换的方法。 最简单方法：使用中间变量互换两个变量最简单的方法是使用一个临时的中间变量，代码如下： 1234567void swap(int* x, int* y)&amp;#123;    int tmp;    tmp = *x;    *x  = *y;    *y  = tmp;&amp;#125;">
+<meta property="og:updated_time" content="2018-03-10T11:50:16.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="几种变量互换的方法">
-<meta name="twitter:description" content="几种变量互换的方法以前写过变量交换的程序，当时还记得特别强调过，要使用指针或引用，否则会出错，本文就介绍几种交换的方法。 最简单方法：使用中间变量互换两个变量最简单的方法是使用一个临时的中间变量，代码如下： 1234567void swap(int* x, int* y)&amp;#123;	int tmp;	tmp = *x;	*x  = *y;	*y  = tmp;&amp;#125;">
+<meta name="twitter:description" content="几种变量互换的方法以前写过变量交换的程序，当时还记得特别强调过，要使用指针或引用，否则会出错，本文就介绍几种交换的方法。 最简单方法：使用中间变量互换两个变量最简单的方法是使用一个临时的中间变量，代码如下： 1234567void swap(int* x, int* y)&amp;#123;    int tmp;    tmp = *x;    *x  = *y;    *y  = tmp;&amp;#125;">
   
     <link rel="alternative" href="/atom.xml" title="myw31415926&#39;s blog" type="application/atom+xml">
   
@@ -194,15 +194,15 @@
       
         <h1 id="几种变量互换的方法"><a href="#几种变量互换的方法" class="headerlink" title="几种变量互换的方法"></a>几种变量互换的方法</h1><p>以前写过变量交换的程序，当时还记得特别强调过，要使用指针或引用，否则会出错，本文就介绍几种交换的方法。</p>
 <h2 id="最简单方法：使用中间变量"><a href="#最简单方法：使用中间变量" class="headerlink" title="最简单方法：使用中间变量"></a>最简单方法：使用中间变量</h2><p>互换两个变量最简单的方法是使用一个临时的中间变量，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>* x, <span class="keyword">int</span>* y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> tmp;</span><br><span class="line">	tmp = *x;</span><br><span class="line">	*x  = *y;</span><br><span class="line">	*y  = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>* x, <span class="keyword">int</span>* y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp;</span><br><span class="line">    tmp = *x;</span><br><span class="line">    *x  = *y;</span><br><span class="line">    *y  = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="高大上方法：不使用中间变量"><a href="#高大上方法：不使用中间变量" class="headerlink" title="高大上方法：不使用中间变量"></a>高大上方法：不使用中间变量</h2><p>更加高大上的方法是不使用中间变量，可以使用两个数求和然后相减的方式进行变量互换，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>* x, <span class="keyword">int</span>* y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	*x = *x + *y;</span><br><span class="line">	*y = *x - *y;	<span class="comment">// y=(x+y)-y; y=原来x</span></span><br><span class="line">	*x = *x - *y;	<span class="comment">// x=(x+y)-x; y=原来x, x=原来y</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>* x, <span class="keyword">int</span>* y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    *x = *x + *y;</span><br><span class="line">    *y = *x - *y;	<span class="comment">// y=(x+y)-y; y=原来x</span></span><br><span class="line">    *x = *x - *y;	<span class="comment">// x=(x+y)-x; y=原来x, x=原来y</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>原理很简单：保存<code>x</code>和<code>y</code>的和，然后再经过一个简单的减法运算实现<code>x</code>和<code>y</code>的互换。<strong>但是该方法存在上溢的可能</strong>，若<code>x</code>和<code>y</code>的数值过大的话，就会超出<code>int</code>的表示范围，导致计算错误。那么有更好的办法吗？<br>Yes！可以利用位运算的方式进行变量互换，<strong>原理是一个数异或同一个数两次，结果不变</strong>。而且不存在上溢的问题，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>* x, <span class="keyword">int</span>* y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	*x = *x ^ *y;</span><br><span class="line">	*y = *x ^ *y;	<span class="comment">// y=(x^y)^y; y=原来x</span></span><br><span class="line">	*x = *x ^ *y;	<span class="comment">// x=(x^y)^x; y=原来x, x=原来y</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>* x, <span class="keyword">int</span>* y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    *x = *x ^ *y;</span><br><span class="line">    *y = *x ^ *y;	<span class="comment">// y=(x^y)^y; y=原来x</span></span><br><span class="line">    *x = *x ^ *y;	<span class="comment">// x=(x^y)^x; y=原来x, x=原来y</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注意，第三步<code>*x = *x ^ *y</code>这里的<code>y</code>已经变为了原来的<code>x</code>，运算后<code>x</code>才变成原来的<code>y</code>。</p>
 <h2 id="找乐子方法：不使用中间变量"><a href="#找乐子方法：不使用中间变量" class="headerlink" title="找乐子方法：不使用中间变量"></a>找乐子方法：不使用中间变量</h2><p>在网上看见过另一个很有意思的方法，能想出来的也是人才啊，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>* x, <span class="keyword">int</span>* y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"x = %d\n"</span>, *y);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"y = %d\n"</span>, *x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>* x, <span class="keyword">int</span>* y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"x = %d\n"</span>, *y);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"y = %d\n"</span>, *x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>至少看打印信息，变量的确是互换了，但这种方法纯属乐子，当不得真，嘿嘿……</p>
 
       
@@ -472,11 +472,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,15 +488,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">book</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
             
             <div class="clearfix"></div>

@@ -14,14 +14,14 @@
 <meta property="og:title" content="fstream 中 getline 读取数据的问题">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/fstream_getline/index.html">
 <meta property="og:site_name" content="myw31415926&#39;s blog">
-<meta property="og:description" content="fstream 中 getline 读取数据的问题今天在调试程序的时候，遇到 C++ fstream.getline 问题。代码如下 12345678fstream file;file.open(data_file, ios::in | ios::out);char line[256]while(!file.eof()) &amp;#123;	file.getline(line, sizeof(line)">
+<meta property="og:description" content="fstream 中 getline 读取数据的问题今天在调试程序的时候，遇到 C++ fstream.getline 问题。代码如下 12345678fstream file;file.open(data_file, ios::in | ios::out);char line[256]while(!file.eof()) &amp;#123;    file.getline(line, sizeof(li">
 <meta property="og:image" content="http://yoursite.com/image/fstream_getline_1.jpg">
 <meta property="og:image" content="http://yoursite.com/image/fstream_getline_2.jpg">
 <meta property="og:image" content="http://yoursite.com/image/fstream_getline_3.jpg">
-<meta property="og:updated_time" content="2017-12-03T04:16:44.848Z">
+<meta property="og:updated_time" content="2018-03-10T11:47:30.917Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fstream 中 getline 读取数据的问题">
-<meta name="twitter:description" content="fstream 中 getline 读取数据的问题今天在调试程序的时候，遇到 C++ fstream.getline 问题。代码如下 12345678fstream file;file.open(data_file, ios::in | ios::out);char line[256]while(!file.eof()) &amp;#123;	file.getline(line, sizeof(line)">
+<meta name="twitter:description" content="fstream 中 getline 读取数据的问题今天在调试程序的时候，遇到 C++ fstream.getline 问题。代码如下 12345678fstream file;file.open(data_file, ios::in | ios::out);char line[256]while(!file.eof()) &amp;#123;    file.getline(line, sizeof(li">
 <meta name="twitter:image" content="http://yoursite.com/image/fstream_getline_1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="myw31415926&#39;s blog" type="application/atom+xml">
@@ -197,7 +197,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="fstream-中-getline-读取数据的问题"><a href="#fstream-中-getline-读取数据的问题" class="headerlink" title="fstream 中 getline 读取数据的问题"></a>fstream 中 getline 读取数据的问题</h2><p>今天在调试程序的时候，遇到 C++ <code>fstream.getline</code> 问题。代码如下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fstream file;</span><br><span class="line">file.open(data_file, ios::in | ios::out);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> line[<span class="number">256</span>]</span><br><span class="line"><span class="keyword">while</span>(!file.eof()) &#123;</span><br><span class="line">	file.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fstream file;</span><br><span class="line">file.open(data_file, ios::in | ios::out);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> line[<span class="number">256</span>]</span><br><span class="line"><span class="keyword">while</span>(!file.eof()) &#123;</span><br><span class="line">    file.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在读取文件结束时，总会多打印一个空行。我在网上查找了一些资料，大意都是说：<strong>文件读完最后一行后，文件指针的位置还在最后一行，并不是并不是结尾，所以 eof 仍返回 false，当 getline 再读一次，则什么也读不到，这个时候 eof 才返回返回 true。</strong></p>
 <p>可我总觉得这种说法有些牵强，查阅官方文档</p>
 <blockquote>
@@ -217,17 +217,17 @@
 <ul>
 <li>方法1</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	f.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">&#125; <span class="keyword">while</span>(!f.eof())</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    f.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">&#125; <span class="keyword">while</span>(!f.eof())</span><br></pre></td></tr></table></figure>
 <p>这种方法需要写两遍 <code>getline</code>，有点麻烦。</p>
 <ul>
 <li>方法2</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(!f.eof()) &#123;</span><br><span class="line">	f.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">strlen</span>(line) &lt;= <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(!f.eof()) &#123;</span><br><span class="line">    f.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strlen</span>(line) &lt;= <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这种方法中间有一个判断，会过滤掉所有空行。</p>
 <ul>
 <li>方法3</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(f.getline(line, <span class="keyword">sizeof</span>(line))) &#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(f.getline(line, <span class="keyword">sizeof</span>(line))) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这种方法最简单，<code>getline</code> 遇见 <code>EOF</code> 时会返回 <code>false</code>，推荐使用！</p>
 <p>附 <code>getline</code> 的官方文档</p>
 <blockquote>
@@ -508,11 +508,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -524,15 +524,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">book</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
             
             <div class="clearfix"></div>

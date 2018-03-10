@@ -14,11 +14,11 @@
 <meta property="og:title" content="fstream 中 seekp 设置无效的问题">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/fstream_seekp/index.html">
 <meta property="og:site_name" content="myw31415926&#39;s blog">
-<meta property="og:description" content="fstream 中 seekp 设置无效的问题今天在写程序的时候，遇见一个 C++ 文件流 fstream 指针重定位的问题。代码如下 1234567891011121314fstream file;file.open(data_file, ios::in | ios::out);char line[256]// Loop 1while(!file.eof()) &amp;#123;	file.getli">
-<meta property="og:updated_time" content="2017-12-03T04:17:01.745Z">
+<meta property="og:description" content="fstream 中 seekp 设置无效的问题今天在写程序的时候，遇见一个 C++ 文件流 fstream 指针重定位的问题。代码如下 1234567891011121314fstream file;file.open(data_file, ios::in | ios::out);char line[256]// Loop 1while(!file.eof()) &amp;#123;    file.ge">
+<meta property="og:updated_time" content="2018-03-10T11:47:47.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fstream 中 seekp 设置无效的问题">
-<meta name="twitter:description" content="fstream 中 seekp 设置无效的问题今天在写程序的时候，遇见一个 C++ 文件流 fstream 指针重定位的问题。代码如下 1234567891011121314fstream file;file.open(data_file, ios::in | ios::out);char line[256]// Loop 1while(!file.eof()) &amp;#123;	file.getli">
+<meta name="twitter:description" content="fstream 中 seekp 设置无效的问题今天在写程序的时候，遇见一个 C++ 文件流 fstream 指针重定位的问题。代码如下 1234567891011121314fstream file;file.open(data_file, ios::in | ios::out);char line[256]// Loop 1while(!file.eof()) &amp;#123;    file.ge">
   
     <link rel="alternative" href="/atom.xml" title="myw31415926&#39;s blog" type="application/atom+xml">
   
@@ -193,7 +193,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="fstream-中-seekp-设置无效的问题"><a href="#fstream-中-seekp-设置无效的问题" class="headerlink" title="fstream 中 seekp 设置无效的问题"></a>fstream 中 seekp 设置无效的问题</h2><p>今天在写程序的时候，遇见一个 C++ 文件流 <code>fstream</code> 指针重定位的问题。代码如下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fstream file;</span><br><span class="line">file.open(data_file, ios::in | ios::out);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> line[<span class="number">256</span>]</span><br><span class="line"><span class="comment">// Loop 1</span></span><br><span class="line"><span class="keyword">while</span>(!file.eof()) &#123;</span><br><span class="line">	file.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">file.seekp(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// Loop 2</span></span><br><span class="line"><span class="keyword">while</span>(!file.eof()) &#123;</span><br><span class="line">	file.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fstream file;</span><br><span class="line">file.open(data_file, ios::in | ios::out);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> line[<span class="number">256</span>]</span><br><span class="line"><span class="comment">// Loop 1</span></span><br><span class="line"><span class="keyword">while</span>(!file.eof()) &#123;</span><br><span class="line">    file.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">file.seekp(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// Loop 2</span></span><br><span class="line"><span class="keyword">while</span>(!file.eof()) &#123;</span><br><span class="line">    file.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>测试发现，根本进不去第二次 <code>while</code> 循环，此时 <code>file.eof()</code> 直接返回 <code>true</code>，也就是说 <code>file.seekp(0)</code> 根本就没有起作用。</p>
 <p>这就邪了门了，因为在 C 中，<code>fseek</code> 是可以的，但是 C++的 <code>fstream.seekp</code> 就不行了，它们内部的原理应该是一样的才对啊。后来通过查找资料，发现在文件对象重复使用时，需要调用 <code>clear</code>，它的官方说明如下<br><a id="more"></a></p>
 <blockquote>
@@ -482,11 +482,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,15 +498,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">book</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
             
             <div class="clearfix"></div>

@@ -169,6 +169,196 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-fibonacci_program" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/10/fibonacci_program/">斐波那契数列—C语言实现</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/10/fibonacci_program/" class="archive-article-date">
+  	<time datetime="2018-03-10T13:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="斐波那契数列—C语言实现"><a href="#斐波那契数列—C语言实现" class="headerlink" title="斐波那契数列—C语言实现"></a>斐波那契数列—C语言实现</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><a href="/2018/03/05/fibonacci/">上文</a>介绍了斐波那契（fibonacci）数列的相关概念，本文介绍用C语言实现斐波那契数列的几种方法。注意，fibonacci数列的递推公式如下：  </p>
+<blockquote>
+<p>F(0) = 0<br>F(1) = 1<br>F(n) = F(n-1) + F(n-2) &nbsp;&nbsp;&nbsp; (n &gt;= 2)</p>
+</blockquote>
+<h2 id="算法1：递归"><a href="#算法1：递归" class="headerlink" title="算法1：递归"></a>算法1：递归</h2><p>根据fibonacci数列的递推公式，很容易得到一个递归算法，代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 算法1：递归，时间复杂度 O(2^n) */</span></span><br><span class="line"><span class="keyword">uint64_t</span> fib_recurse(<span class="keyword">int</span> n)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (n &lt; <span class="number">2</span>) ? n : fib_recurse(n - <span class="number">2</span>) + fib_recurse(n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很不幸，此算法虽然简单，但因为每次调用都会产生两个递归调用，所以时间复杂度为<strong>O(2^n)</strong>，不建议使用。</p>
+        
+          <a class="article-more-a" href="/2018/03/10/fibonacci_program/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/10/fibonacci_program/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-fast_pow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/09/fast_pow/">快速幂次方算法</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/09/fast_pow/" class="archive-article-date">
+  	<time datetime="2018-03-09T14:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="快速幂次方算法"><a href="#快速幂次方算法" class="headerlink" title="快速幂次方算法"></a>快速幂次方算法</h1><p>在C语言中，计算幂次方有专门的函数<code>pow</code>。那如果是要自己写一个计算幂次方的函数呢，该如何实现？很多同学会想，那还不简单，直接上手：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">my_pow</span><span class="params">(<span class="keyword">int</span> base, <span class="keyword">int</span> <span class="built_in">exp</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, ret = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i&lt; <span class="built_in">exp</span>; i++)</span><br><span class="line">        ret *= base;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码完全正确，但是有一个<code>for</code>循环，时间复杂度为<strong>O(n)</strong>，有没有更好的算法呢？<br>
+        
+          <a class="article-more-a" href="/2018/03/09/fast_pow/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/09/fast_pow/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-qiutu_jianshe" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -396,11 +586,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
@@ -422,187 +612,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/05/fibonacci/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-switch_tow_variable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/05/switch_tow_variable/">几种变量互换的方法</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/05/switch_tow_variable/" class="archive-article-date">
-  	<time datetime="2018-03-05T14:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="几种变量互换的方法"><a href="#几种变量互换的方法" class="headerlink" title="几种变量互换的方法"></a>几种变量互换的方法</h1><p>以前写过变量交换的程序，当时还记得特别强调过，要使用指针或引用，否则会出错，本文就介绍几种交换的方法。</p>
-<h2 id="最简单方法：使用中间变量"><a href="#最简单方法：使用中间变量" class="headerlink" title="最简单方法：使用中间变量"></a>最简单方法：使用中间变量</h2><p>互换两个变量最简单的方法是使用一个临时的中间变量，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>* x, <span class="keyword">int</span>* y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> tmp;</span><br><span class="line">	tmp = *x;</span><br><span class="line">	*x  = *y;</span><br><span class="line">	*y  = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/03/05/switch_tow_variable/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/05/switch_tow_variable/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-git_checkout" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/05/git_checkout/">git中将历史版本checkout到工作区</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/05/git_checkout/" class="archive-article-date">
-  	<time datetime="2018-03-05T14:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="git中将历史版本checkout到工作区"><a href="#git中将历史版本checkout到工作区" class="headerlink" title="git中将历史版本checkout到工作区"></a>git中将历史版本checkout到工作区</h1><p>今天有一个项目，需要将项目代码的某个历史版本checkout到工作区中（使用git的版本管理器）。试了很多次都没有成功，到最后才发现，是自己搞错了，真是笨死。现在将自己的解决问题的过程记录下来。</p>
-<p>要将git中将某个历史版本checkout到工作区，只需要两步：</p>
-<ul>
-<li>创建工作区，将git上的版本clone到本地  </li>
-<li>使用checkout将工作区切换到指定版本  </li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/03/05/git_checkout/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/疑难杂症//" class="article-tag-list-link color5">疑难杂症</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/05/git_checkout/">展开全文 >></a>
         </p>
       
 
@@ -729,11 +738,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -745,15 +754,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">book</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
             
             <div class="clearfix"></div>

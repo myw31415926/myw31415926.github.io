@@ -169,6 +169,198 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-fstream_getline" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/03/fstream_getline/">fstream 中 getline 读取数据的问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/03/fstream_getline/" class="archive-article-date">
+  	<time datetime="2017-12-03T04:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="fstream-中-getline-读取数据的问题"><a href="#fstream-中-getline-读取数据的问题" class="headerlink" title="fstream 中 getline 读取数据的问题"></a>fstream 中 getline 读取数据的问题</h2><p>今天在调试程序的时候，遇到 C++ <code>fstream.getline</code> 问题。代码如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fstream file;</span><br><span class="line">file.open(data_file, ios::in | ios::out);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> line[<span class="number">256</span>]</span><br><span class="line"><span class="keyword">while</span>(!file.eof()) &#123;</span><br><span class="line">    file.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; line &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在读取文件结束时，总会多打印一个空行。我在网上查找了一些资料，大意都是说：<strong>文件读完最后一行后，文件指针的位置还在最后一行，并不是并不是结尾，所以 eof 仍返回 false，当 getline 再读一次，则什么也读不到，这个时候 eof 才返回返回 true。</strong></p>
+<p>可我总觉得这种说法有些牵强，查阅官方文档</p>
+<blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line">&gt; <span class="function"><span class="keyword">bool</span> <span class="title">eof</span><span class="params">()</span></span>;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<p>The function eof() returns true if the end of the associated input file has been reached, false otherwise.</p>
+</blockquote>
+<p>可见，只要达到文件结束的地方，<code>eof()</code> 就会返回 <code>true</code>；否则，文件就未结束。<strong>如果最后一行已经是文件结束的地方，那么读完最后一行后，<code>eof()</code> 就该返回 <code>true</code> 才对</strong>。<br>
+        
+          <a class="article-more-a" href="/2017/12/03/fstream_getline/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/疑难杂症//" class="article-tag-list-link color5">疑难杂症</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/03/fstream_getline/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-hexo-github-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/03/hexo-github-blog/">用Hexo在github上搭建你的Blog</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/03/hexo-github-blog/" class="archive-article-date">
+  	<time datetime="2017-12-03T04:00:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>相信很多IT的朋友都想有一个属于自己的Blog，现行的一些很有名的IT网站虽然也提供了一个很不错的Blog平台，但是编写和管理Blog都不是很方便。正好前段时间看到了一个很不错的Blog生成工具<code>Hexo</code>，它是一个简单轻量级的Blog生成工具，由Nodejs编写，但即便你不懂Nodejs，也可以搭建你的Blog，因为你只需要知道设置一些简单的配置，仅此而已。</p>
+<p>下面就是用Hexo在github上搭建Blog的方法。本人亲测，保证有效，嘿嘿~~</p>
+<h2 id="安装基础工具"><a href="#安装基础工具" class="headerlink" title="安装基础工具"></a>安装基础工具</h2><p>只需要安装三个基础工具：<code>git, nodejs, hexo</code></p>
+<ul>
+<li><p>安装<code>git</code><br>从 <a href="https://git-scm.com/" target="_blank" rel="noopener">git官网</a> 下载 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">windows版本</a> 的git安装包。目前最新版本为 <strong>Git-2.13.0-64-bit.exe</strong>， 双击进行安装即可。</p>
+</li>
+<li><p>安装<code>nodejs</code><br>从 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">nodejs官网</a> 下载最新的nodejs安装包。目前最新版本为 <strong>v6.11.0 LTS</strong>， 双击进行安装即可。</p>
+</li>
+<li><p>安装<code>hexo</code><br><code>hexo</code> 是通过 <strong>nodejs</strong> 的包管理器 <strong>npm</strong> 进行安装。打开 <strong>nodejs</strong> 的命令行工具 <strong><em>Node.js command prompt</em></strong>，输入安装命令 <code>npm install hexo-cli -g</code></p>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/12/03/hexo-github-blog/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/03/hexo-github-blog/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -337,11 +529,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -353,15 +545,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">book</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
             
             <div class="clearfix"></div>
