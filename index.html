@@ -169,6 +169,277 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-getopt_long_c" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/11/getopt_long_c/">C/C++命令行解析：getopt和getopt_long</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/11/getopt_long_c/" class="archive-article-date">
+  	<time datetime="2018-03-11T13:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="C-C-命令行解析：getopt和getopt-long"><a href="#C-C-命令行解析：getopt和getopt-long" class="headerlink" title="C/C++命令行解析：getopt和getopt_long"></a>C/C++命令行解析：getopt和getopt_long</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>getopt</code>和<code>getopt_long</code>是Linux中的解析命令行的函数，在Linux程序中使用非常广。本文就来介绍一下这两个函数的定义和用法。</p>
+<p><code>getopt</code>和<code>getopt_long</code>都是用来解析命令行参数的，定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getopt</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> * <span class="keyword">const</span> argv[], </span></span></span><br><span class="line"><span class="function"><span class="params">           <span class="keyword">const</span> <span class="keyword">char</span> *optstring)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span> *optarg;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> optind, opterr, optopt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;getopt.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getopt_long</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> * <span class="keyword">const</span> argv[], </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">const</span> <span class="keyword">char</span> *optstring, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">const</span> struct option *longopts, <span class="keyword">int</span> *longindex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getopt_long_only</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> * <span class="keyword">const</span> argv[],</span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="keyword">const</span> <span class="keyword">char</span> *optstring,</span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="keyword">const</span> struct option *longopts, <span class="keyword">int</span> *longindex)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>注意，这两个函数位于不同的头文件中。其中<code>getopt</code>只能解析短选项参数，而<code>getopt_long</code>不仅包含了<code>getopt</code>的功能，还可以解析长选项参数。</p>
+        
+          <a class="article-more-a" href="/2018/03/11/getopt_long_c/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/11/getopt_long_c/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-usb_error" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/11/usb_error/">U盘容量变小的修复办法</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/11/usb_error/" class="archive-article-date">
+  	<time datetime="2018-03-11T13:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="U盘容量变小的修复办法"><a href="#U盘容量变小的修复办法" class="headerlink" title="U盘容量变小的修复办法"></a>U盘容量变小的修复办法</h1><p>因为要安装CentOS系统，我在制作启动U盘时，遇见一个莫名其妙的问题：即U盘容量变没有了。U盘容量如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span>@<span class="built_in">test</span>-S1200RP:~$ df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">udev            3.8G     0  3.8G   0% /dev</span><br><span class="line">tmpfs           772M  9.4M  763M   2% /run</span><br><span class="line">/dev/sda1       184G  7.4G  167G   5% /</span><br><span class="line">tmpfs           3.8G  204K  3.8G   1% /dev/shm</span><br><span class="line">tmpfs           5.0M  4.0K  5.0M   1% /run/lock</span><br><span class="line">tmpfs           3.8G     0  3.8G   0% /sys/fs/cgroup</span><br><span class="line">/dev/sda3       261G  3.0G  245G   2% /home</span><br><span class="line">tmpfs           772M   72K  772M   1% /run/user/1000</span><br><span class="line">/dev/sdb1       4.1G  4.1G     0 100% /media/<span class="built_in">test</span>/CentOS 7 x86_64</span><br><span class="line">/dev/sdb2       6.1M     0  6.1M   0% /media/<span class="built_in">test</span>/ANACONDA</span><br></pre></td></tr></table></figure>
+<p>可以看出，U盘<code>/dev/sdb2</code>容量只有<strong>6M</strong>，而且一个CentOS系统最多才4G，那16G的U盘中剩余的空间去哪里了？这明显错误啊！而且无论将U盘怎么格式化，都没有办法恢复。经过自己摸索，终于找到了解决办法，后来在网上也发现类似的方法，原理都差不多：<strong>即重新划分U盘分区</strong>。不过我是在Linux下解决的，Windows的同学可以参考：<a href="https://jingyan.baidu.com/article/59703552e754e48fc00740ed.html" target="_blank" rel="noopener">如何解决U盘装系统后磁盘总容量变小</a>。</p>
+        
+          <a class="article-more-a" href="/2018/03/11/usb_error/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/疑难杂症//" class="article-tag-list-link color5">疑难杂症</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/11/usb_error/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-strong_and_weak_program" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/11/strong_and_weak_program/">强类型语言和弱类型语言</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/11/strong_and_weak_program/" class="archive-article-date">
+  	<time datetime="2018-03-11T13:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="强类型语言和弱类型语言"><a href="#强类型语言和弱类型语言" class="headerlink" title="强类型语言和弱类型语言"></a>强类型语言和弱类型语言</h1><p>今天偶尔看到了这篇文章<a href="https://www.zhihu.com/question/19918532" target="_blank" rel="noopener">《弱类型、强类型、动态类型、静态类型语言的区别是什么？》</a>。里面有很多关于强类型和弱类型语言和弱类型语言的定义，有些更是引经据典，但却是有些晦涩难懂。感觉大家挣来吵去，都没有一个权威的结论。有的说C++是强类型语言，有的说的弱类型语言。MD，我头都看大了！</p>
+<p>所以，我在这里总结一下。注意，不一定是正确的结论，只是我自己的想法，也有点和稀泥的嫌疑，如有错误，欢迎指正！</p>
+        
+          <a class="article-more-a" href="/2018/03/11/strong_and_weak_program/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/11/strong_and_weak_program/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-fibonacci_program" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -359,291 +630,9 @@
 
 
   
-    <article id="post-qiutu_jianshe" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/08/qiutu_jianshe/">读《囚徒健身》</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/08/qiutu_jianshe/" class="archive-article-date">
-  	<time datetime="2018-03-08T14:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="读《囚徒健身》"><a href="#读《囚徒健身》" class="headerlink" title="读《囚徒健身》"></a>读《囚徒健身》</h1><p>今天将《囚徒健身：用失传的技艺练就强大的生存实力》看完了，总的来说，这还是一本很不错的健身书籍。其中，有几句关于健身的话说得非常好：</p>
-<blockquote>
-<p>移动自己的身体，而不是移动外物。  </p>
-<p>永远留一组的力量，又不是明天就不健身了。</p>
-<p>只有最危险的环境才能催生出最强大的力量训练体系。</p>
-<p>锻炼是让你的身体变得更舒服、更灵活自如。如果疼痛，肯定哪里不对。</p>
-<p>无论你被关在多么小的空间之内，无论外界环境如何，强化身体和心灵都是你的自由，任谁都无法剥夺的自由。</p>
-</blockquote>
-<p>里面写的健身方法简单实用，而且循序渐进，很值得一试。但我觉得更重要的还是在于 <strong>坚持！坚持！坚持！</strong>。记住：</p>
-<blockquote>
-<p>看再多的书<br>买再多的器材<br>不练<br>就P用都没有</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/03/08/qiutu_jianshe/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">book</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/读书笔记//" class="article-tag-list-link color5">读书笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/08/qiutu_jianshe/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-no_caching_mode_page_found" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/no_caching_mode_page_found/">U盘安装CentOS7的问题：No Caching mode page found /dev/root does not exist</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/06/no_caching_mode_page_found/" class="archive-article-date">
-  	<time datetime="2018-03-06T14:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="U盘安装CentOS7的问题：No-Caching-mode-page-found-dev-root-does-not-exist"><a href="#U盘安装CentOS7的问题：No-Caching-mode-page-found-dev-root-does-not-exist" class="headerlink" title="U盘安装CentOS7的问题：No Caching mode page found /dev/root does not exist"></a>U盘安装CentOS7的问题：No Caching mode page found /dev/root does not exist</h1><p>今天在使用U盘安装CentOS7时，出现如下问题：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[sdb] No Caching mode page found</span><br><span class="line">[sdb] Assuming drive cache:write through</span><br><span class="line">....</span><br><span class="line">Could not boot</span><br><span class="line">/dev/root does not exist</span><br></pre></td></tr></table></figure>
-<p>这是由于启动命令行中指定的启动盘符错误，解决方法如下。<br>
-        
-          <a class="article-more-a" href="/2018/03/06/no_caching_mode_page_found/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/疑难杂症//" class="article-tag-list-link color5">疑难杂症</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/06/no_caching_mode_page_found/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-fibonacci" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/05/fibonacci/">斐波那契数列</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/05/fibonacci/" class="archive-article-date">
-  	<time datetime="2018-03-05T14:20:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>斐波那契数列（fibonacci sequence），又称黄金分割数列、因数学家列昂纳多·斐波那契（Leonardoda Fibonacci）以兔子繁殖为例子而引入，故又称为“兔子数列”。</p>
-<p>在数学上，斐波纳契数列中任意一个数都是前两个数的和，递推公式如下：  </p>
-<blockquote>
-<p>F(0) = 0<br>F(1) = 1<br>F(n) = F(n-1) + F(n-2) &nbsp;&nbsp;&nbsp; (n &gt;= 2)</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/03/05/fibonacci/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/05/fibonacci/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -750,11 +739,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">

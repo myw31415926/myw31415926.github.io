@@ -169,6 +169,284 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-error_cout" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/03/error_cout/">错误：undefined reference to &#39;std::cout&#39;</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/03/error_cout/" class="archive-article-date">
+  	<time datetime="2017-12-03T04:12:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="undefined-reference-to-‘std-cout’"><a href="#undefined-reference-to-‘std-cout’" class="headerlink" title="undefined reference to ‘std::cout’"></a>undefined reference to ‘std::cout’</h1><p>今天在编译C++程序时遇见一个很奇怪的错误，错误信息如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span>@<span class="built_in">test</span>-S1200RP:~/mayw$ gcc isodata.cpp -o isodata</span><br><span class="line">/tmp/ccmM19IC.o: In <span class="keyword">function</span> `Print(std::vector&lt;Cluster, std::allocator&lt;Cluster&gt; &gt;)<span class="string">':</span></span><br><span class="line"><span class="string">isodata.cpp:(.text+0x28b): undefined reference to `std::cout'</span></span><br><span class="line">isodata.cpp:(.text+0x290): undefined reference to `std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;&amp; std::operator&lt;&lt; &lt;std::char_traits&lt;char&gt; &gt;(std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;&amp;, char const*)<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>很明显，在C++中只要你包含了 <code>#include &lt;iostream&gt;</code> 就不可能出现 <code>undefined reference to &#39;std::cout&#39;</code>。但这里偏偏就出现了，什么原因呢？</p>
+<p>原来 C 和 C++ 程序虽然相识，但是编译器确实严格区分的，即分别为 <strong><em>gcc</em></strong> 和 <strong><em>g++</em></strong>。</p>
+<ul>
+<li><strong><em>gcc</em></strong> 和 <strong><em>g++</em></strong> 都是GUN的编译器，<strong><em>gcc</em></strong> 针对 C 程序，<strong><em>g++</em></strong>  针对 C++ 程序</li>
+<li><strong><em>g++</em></strong> 会把 <strong>*.c</strong> 和 <strong>*.cpp</strong> 当作 C++ 程序来编译，而 <strong><em>gcc</em></strong> 则会当作 C 程序来编译</li>
+<li><strong><em>gcc</em></strong> 若要编译 C++ 程序，需要加上 <code>-lstdc++</code></li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/12/03/error_cout/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/疑难杂症//" class="article-tag-list-link color5">疑难杂症</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/03/error_cout/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-operator_priority" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/03/operator_priority/">C/C++中运算符优先级造成的奇怪错误</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/03/operator_priority/" class="archive-article-date">
+  	<time datetime="2017-12-03T04:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在调试代码的时候发现一个很奇怪的地方，代码如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetData</span><span class="params">(<span class="keyword">int</span> data[], <span class="keyword">int</span>* num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    *num++</span><br><span class="line">    <span class="comment">// other code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>GetData</code> 是个获取数据的函数，但却得不到正确的数据，因为 <code>num</code> 始终为0。后来通过gdb调试才发现，每一次</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*num++</span><br></pre></td></tr></table></figure>
+<p>后，num的值并未自增1，而是 <code>num</code> 的值增加了4（ <strong>int</strong> 占4个字节），原因已经很明显了： <strong>因为 ++ 运算符的优先级高于 * 的优先级 </strong>，将其改为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(*num)++</span><br></pre></td></tr></table></figure>
+<p>即可。很简单的细节问题，却造成了奇怪的错误，在此记录一下。另外，附上 <strong>C/C++</strong> 运算符的优先级列表。<br>
+        
+          <a class="article-more-a" href="/2017/12/03/operator_priority/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/疑难杂症//" class="article-tag-list-link color5">疑难杂症</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/03/operator_priority/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-fstream_seekp" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/03/fstream_seekp/">fstream 中 seekp 设置无效的问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/03/fstream_seekp/" class="archive-article-date">
+  	<time datetime="2017-12-03T04:03:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="fstream-中-seekp-设置无效的问题"><a href="#fstream-中-seekp-设置无效的问题" class="headerlink" title="fstream 中 seekp 设置无效的问题"></a>fstream 中 seekp 设置无效的问题</h2><p>今天在写程序的时候，遇见一个 C++ 文件流 <code>fstream</code> 指针重定位的问题。代码如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fstream file;</span><br><span class="line">file.open(data_file, ios::in | ios::out);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> line[<span class="number">256</span>]</span><br><span class="line"><span class="comment">// Loop 1</span></span><br><span class="line"><span class="keyword">while</span>(!file.eof()) &#123;</span><br><span class="line">    file.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">file.seekp(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// Loop 2</span></span><br><span class="line"><span class="keyword">while</span>(!file.eof()) &#123;</span><br><span class="line">    file.getline(line, <span class="keyword">sizeof</span>(line));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试发现，根本进不去第二次 <code>while</code> 循环，此时 <code>file.eof()</code> 直接返回 <code>true</code>，也就是说 <code>file.seekp(0)</code> 根本就没有起作用。</p>
+<p>这就邪了门了，因为在 C 中，<code>fseek</code> 是可以的，但是 C++的 <code>fstream.seekp</code> 就不行了，它们内部的原理应该是一样的才对啊。后来通过查找资料，发现在文件对象重复使用时，需要调用 <code>clear</code>，它的官方说明如下<br>
+        
+          <a class="article-more-a" href="/2017/12/03/fstream_seekp/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/疑难杂症//" class="article-tag-list-link color5">疑难杂症</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/03/fstream_seekp/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-fstream_getline" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -361,80 +639,9 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/03/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/03/hello-world/" class="archive-article-date">
-  	<time datetime="2017-12-03T03:15:18.175Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/03/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -541,11 +748,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">

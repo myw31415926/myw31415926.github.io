@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Category: 编程 | myw31415926&#39;s blog</title>
+  <title>C/C++命令行解析：getopt和getopt_long | myw31415926&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="myw31415926&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/categories/编程/page/2/index.html">
+  <meta name="description" content="C/C++命令行解析：getopt和getopt_long概述getopt和getopt_long是Linux中的解析命令行的函数，在Linux程序中使用非常广。本文就来介绍一下这两个函数的定义和用法。 getopt和getopt_long都是用来解析命令行参数的，定义如下： 123456789101112131415">
+<meta name="keywords" content="C&#x2F;C++,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C&#x2F;C++命令行解析：getopt和getopt_long">
+<meta property="og:url" content="http://yoursite.com/2018/03/11/getopt_long_c/index.html">
 <meta property="og:site_name" content="myw31415926&#39;s blog">
+<meta property="og:description" content="C/C++命令行解析：getopt和getopt_long概述getopt和getopt_long是Linux中的解析命令行的函数，在Linux程序中使用非常广。本文就来介绍一下这两个函数的定义和用法。 getopt和getopt_long都是用来解析命令行参数的，定义如下： 1234567891011121314151617#include &amp;lt;unistd.h&amp;gt;int getopt(">
+<meta property="og:updated_time" content="2018-03-11T16:51:57.648Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="myw31415926&#39;s blog">
+<meta name="twitter:title" content="C&#x2F;C++命令行解析：getopt和getopt_long">
+<meta name="twitter:description" content="C/C++命令行解析：getopt和getopt_long概述getopt和getopt_long是Linux中的解析命令行的函数，在Linux程序中使用非常广。本文就来介绍一下这两个函数的定义和用法。 getopt和getopt_long都是用来解析命令行参数的，定义如下： 1234567891011121314151617#include &amp;lt;unistd.h&amp;gt;int getopt(">
   
     <link rel="alternative" href="/atom.xml" title="myw31415926&#39;s blog" type="application/atom+xml">
   
@@ -167,36 +172,97 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-getopt_long_c" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C/C++命令行解析：getopt和getopt_long
+    </h1>
+  
+
+        
+        <a href="/2018/03/11/getopt_long_c/" class="archive-article-date">
+  	<time datetime="2018-03-11T13:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="C-C-命令行解析：getopt和getopt-long"><a href="#C-C-命令行解析：getopt和getopt-long" class="headerlink" title="C/C++命令行解析：getopt和getopt_long"></a>C/C++命令行解析：getopt和getopt_long</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>getopt</code>和<code>getopt_long</code>是Linux中的解析命令行的函数，在Linux程序中使用非常广。本文就来介绍一下这两个函数的定义和用法。</p>
+<p><code>getopt</code>和<code>getopt_long</code>都是用来解析命令行参数的，定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getopt</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> * <span class="keyword">const</span> argv[], </span></span></span><br><span class="line"><span class="function"><span class="params">           <span class="keyword">const</span> <span class="keyword">char</span> *optstring)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span> *optarg;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> optind, opterr, optopt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;getopt.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getopt_long</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> * <span class="keyword">const</span> argv[], </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">const</span> <span class="keyword">char</span> *optstring, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">const</span> struct option *longopts, <span class="keyword">int</span> *longindex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getopt_long_only</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> * <span class="keyword">const</span> argv[],</span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="keyword">const</span> <span class="keyword">char</span> *optstring,</span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="keyword">const</span> struct option *longopts, <span class="keyword">int</span> *longindex)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>注意，这两个函数位于不同的头文件中。其中<code>getopt</code>只能解析短选项参数，而<code>getopt_long</code>不仅包含了<code>getopt</code>的功能，还可以解析长选项参数。</p>
+<a id="more"></a>
+<h2 id="命令行参数解析之：getopt"><a href="#命令行参数解析之：getopt" class="headerlink" title="命令行参数解析之：getopt"></a>命令行参数解析之：getopt</h2><p><code>getopt</code>的定义位于头文件<code>&lt;unistd.h&gt;</code>中，参数信息如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief: 解析命令行参数</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param argc, argv: 命令行参数，由main函数提供</span></span><br><span class="line"><span class="comment"> * @param optstring:  命令行选项字符串</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @return: 成功返回指定的选项字符；失败返回-1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getopt</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> * <span class="keyword">const</span> argv[], </span></span></span><br><span class="line"><span class="function"><span class="params">           <span class="keyword">const</span> <span class="keyword">char</span> *optstring)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * optarg: 当前选项参数（如果有）的指针</span></span><br><span class="line"><span class="comment"> * optind: 再次调用getopt时的下一个 argv 指针的索引</span></span><br><span class="line"><span class="comment"> * optopt: 最后一个未知选项</span></span><br><span class="line"><span class="comment"> * opterr: 如果不希望getopt打印错误信息，则可将opterr设为0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span> *optarg;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> optind, opterr, optopt;</span><br></pre></td></tr></table></figure>
+<p>下面以<code>ab:c:de::</code>为例，描述参数<code>optstring</code>的含义：</p>
+<ol>
+<li>单个字符，表示选项。如<code>a, d</code>表示一个单独的命令行选项<code>-a -d</code>。</li>
+<li>单个字符后接一个冒号，表示该选项后必须跟一个参数，参数必须紧邻选项或者以空格隔开，该参数的指针为<code>optarg</code>。如<code>b, c</code>表示带参数的命令行选项<code>-b100 -c 200</code>。</li>
+<li>单个字符后跟两个冒号，表示该选项后可以跟一个参数，也可以不跟。如果跟一个参数，参数必须紧邻选项后，不能以空格隔开。如果没有跟参数，则<code>optarg</code>为 <code>NULL</code>。如<code>e</code>表示可带参数的命令行选项<code>-e</code>或<code>-e200</code>。<strong>记住，不能有空格</strong>。</li>
+</ol>
+<p>实例代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;  /* atoi */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> opt;</span><br><span class="line">    <span class="keyword">int</span> n_flags = <span class="number">0</span>, t_flags = <span class="number">0</span>, nsecs = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((opt = getopt(argc, argv, <span class="string">"nt:"</span>)) != <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">switch</span> (opt) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'n'</span>:</span><br><span class="line">            n_flags = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> <span class="string">'t'</span>:</span><br><span class="line">            nsecs = atoi(optarg);</span><br><span class="line">            t_flags = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>: <span class="comment">/* '?' */</span></span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Usage: %s [-t nsecs] [-n] name\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">            <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"-n flags=%d; -t flag=%d, nsecs=%d; optind=%d\n"</span>, </span><br><span class="line">        n_flags, t_flags, nsecs, optind);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (optind &gt;= argc) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Expected argument after options\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"name argument = %s\n"</span>, argv[optind]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用过程中一定要仔细，因为<code>getopt</code>不会智能地检测错误，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mayw@mayw-VBox:~/tmp$ ./getopt_test -n -t 100 name</span><br><span class="line">-n flags=1; -t flag=1, nsecs=100; optind=4</span><br><span class="line">name argument = name</span><br></pre></td></tr></table></figure>
+<p>使用正确，<code>-n</code>和<code>-t 100</code>都能被检测到。但如果输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mayw@mayw-VBox:~/tmp$ ./getopt_test -t -n 100</span><br><span class="line">-n flags=0; -t flag=1, nsecs=0; optind=3</span><br><span class="line">name argument = 100</span><br></pre></td></tr></table></figure>
+<p><code>-t</code>没有带参数，会把<code>-n</code>当作其参数，所以<code>nsecs = atoi(optarg);</code>的结果为0。而此时不会检测到<code>-n</code>选项，它被当作了<code>-t</code>的参数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mayw@mayw-VBox:~/tmp$ ./getopt_test -n -t 100</span><br><span class="line">-n flags=1; -t flag=1, nsecs=100; optind=4</span><br><span class="line">Expected argument after options</span><br></pre></td></tr></table></figure>
+<p><code>-n</code>和<code>-t 100</code>可以正确被检测到，但是还缺少一个必要的参数<code>name</code>。<strong>使用时必须看清楚每个选项的含义，这很重要！</strong></p>
+<h2 id="命令行参数解析之：getopt-long"><a href="#命令行参数解析之：getopt-long" class="headerlink" title="命令行参数解析之：getopt_long"></a>命令行参数解析之：getopt_long</h2><p><code>getopt_long</code>可以处理长选项，定义位于头文件<code>&lt;getopt.h&gt;</code>中。与<code>getopt</code>相比，<code>getopt_long</code>多了两个参数。定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief: 解析命令行参数，支持长选项</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param argc, argv: 命令行参数，由main函数提供</span></span><br><span class="line"><span class="comment"> * @param optstring:  命令行选项字符串</span></span><br><span class="line"><span class="comment"> * @param longopts:   长选项字符串定义</span></span><br><span class="line"><span class="comment"> * @param longindex:  当前长参数在longopts中的索引值</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @return: 成功返回指定的选项字符；失败返回-1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getopt_long</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> * <span class="keyword">const</span> argv[], </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">const</span> <span class="keyword">char</span> *optstring, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">const</span> struct option *longopts, <span class="keyword">int</span> *longindex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getopt_long_only</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> * <span class="keyword">const</span> argv[],</span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="keyword">const</span> <span class="keyword">char</span> *optstring,</span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="keyword">const</span> struct option *longopts, <span class="keyword">int</span> *longindex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* struct option 定义 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">option</span> &#123;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name;     <span class="comment">/* 长参数名 */</span></span><br><span class="line">    <span class="keyword">int</span>         has_arg;  <span class="comment">/* 指定是否有参数 */</span></span><br><span class="line">    <span class="keyword">int</span>        *flag;     <span class="comment">/* 指定getopt_long的返回值 */</span></span><br><span class="line">    <span class="keyword">int</span>         val;      <span class="comment">/* 指定函数返回值 */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>has_arg</code>指明是否带参数值，有3个值：</p>
+<ul>
+<li><strong>no_argument</strong> (或<strong>0</strong>)，表示该参数后面不跟参数值。</li>
+<li><strong>required_argument</strong> (或<strong>1</strong>)，表示该参数后面一定要跟个参数值，如<code>--name bob</code>或<code>--name=bob</code>。</li>
+<li><strong>optional_argument</strong> (或<strong>2</strong>)，表示该参数后面可以跟，也可以不跟参数值，如<code>--name</code>或<code>--name=bob</code>，其他格式都是错误的。</li>
+</ul>
+<p>当<code>flag</code>参数为空时，<code>getopt_long</code>直接将<code>val</code>的数值作为返回值；当它非空时，<code>val</code>的值会被赋给<code>flag</code>指向的整型数中，而函数返回值为0。</p>
+<p>实例代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;getopt.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> opt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* short_options = <span class="string">"ab:c::"</span>;</span><br><span class="line">    <span class="keyword">int</span> option_index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">option</span> <span class="title">long_options</span>[] = &#123;</span></span><br><span class="line">        &#123;<span class="string">"disable"</span>,  no_argument,       <span class="number">0</span>, <span class="string">'d'</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"name"</span>,     required_argument, <span class="number">0</span>, <span class="string">'n'</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"optional"</span>, optional_argument, <span class="number">0</span>, <span class="string">'o'</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"other"</span>,    required_argument, <span class="number">0</span>, <span class="number">0</span>  &#125;,</span><br><span class="line">        &#123;<span class="number">0</span>,          <span class="number">0</span>,                 <span class="number">0</span>, <span class="number">0</span>  &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((opt = getopt_long(argc, argv, short_options, long_options, &amp;option_index)) != <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="comment">/* 打印选项，选项参数，下一个选项的索引和内容，当前长选项的索引*/</span></span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"opt = %c\n"</span>, opt);</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"optarg = %s\n"</span>, optarg);</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"optind = %d\n"</span>, optind);</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"argv[optind - 1] = %s\n"</span>, argv[optind - <span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"option_index = %d\n\n"</span>, option_index);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了简便，这里只打印内部信息，若要像<code>getopt</code>那样使用，则需要在<code>while</code>循环中添加<code>switch ... case ...</code>语句。短选项的测试不必多说，使用长选项参数时要注意，可选参数要用<code>=</code>链接，否则找不到对应的选项参数，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mayw@mayw-VBox:~/tmp$ ./getopt_test --<span class="built_in">disable</span> --name=bob --optional=bob1 </span><br><span class="line">opt = d</span><br><span class="line">optarg = (null)</span><br><span class="line">optind = 2</span><br><span class="line">argv[optind - 1] = --<span class="built_in">disable</span></span><br><span class="line">option_index = 0</span><br><span class="line"></span><br><span class="line">opt = n</span><br><span class="line">optarg = bob</span><br><span class="line">optind = 3</span><br><span class="line">argv[optind - 1] = --name=bob</span><br><span class="line">option_index = 1</span><br><span class="line"></span><br><span class="line">opt = o</span><br><span class="line">optarg = bob1	<span class="comment"># 此时，optarg = bob1</span></span><br><span class="line">optind = 4</span><br><span class="line">argv[optind - 1] = --optional=bob1</span><br><span class="line">option_index = 2</span><br></pre></td></tr></table></figure>
+<p>若<code>--optional</code>不使用<code>=</code>链接，就会出错，找不到可选参数，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mayw@mayw-VBox:~/tmp$ ./getopt_test --<span class="built_in">disable</span> --name=bob --optional bob1 </span><br><span class="line">opt = d</span><br><span class="line">optarg = (null)</span><br><span class="line">optind = 2</span><br><span class="line">argv[optind - 1] = --<span class="built_in">disable</span></span><br><span class="line">option_index = 0</span><br><span class="line"></span><br><span class="line">opt = n</span><br><span class="line">optarg = bob</span><br><span class="line">optind = 3</span><br><span class="line">argv[optind - 1] = --name=bob</span><br><span class="line">option_index = 1</span><br><span class="line"></span><br><span class="line">opt = o</span><br><span class="line">optarg = (null)		<span class="comment"># 此时，optarg = NULL</span></span><br><span class="line">optind = 4</span><br><span class="line">argv[optind - 1] = --optional</span><br><span class="line">option_index = 2</span><br></pre></td></tr></table></figure>
+<p><strong>所以在使用长选项时，选项和参数之间最好都用<code>=</code>链接</strong>。</p>
+<p><code>getopt_long_only</code>函数与<code>getopt_long</code>函数的参数表相同，功能上基本一致。<code>getopt_long</code>只将<code>--name</code>当作长参数，但<code>getopt_long_only</code>会将<code>--name</code>和<code>-name</code>两种选项都当作长参数来匹配。</p>
+<p>在<code>getopt_long</code>在遇到-<code>name</code>时，会拆解成<code>-n -a -m -e</code>到<code>short_options</code>中进行匹配，而<code>getopt_long_only</code>只有<code>-name</code>没有在<code>long_options</code>中匹配时才拆解成<code>-n -a -m -e</code>，然后再到<code>short_options</code>中进行匹配。</p>
+<p>另外，在Linux终端输入<code>man getopt_long</code>可以查看详细的说明文档，有兴趣的同学可以自己查阅~</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://baike.baidu.com/item/getopt" target="_blank" rel="noopener">1. 百度百科 getopt</a><br><a href="https://baike.baidu.com/item/getopt_long" target="_blank" rel="noopener">2. 百度百科 getopt_long</a><br><a href="http://blog.csdn.net/cashey1991/article/details/7942809" target="_blank" rel="noopener">2. getopt和getopt_long函数</a>  </p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/06/linux_kernel_program5/" class="archive-article-date">
-  	<time datetime="2018-02-06T15:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/06/linux_kernel_program5/">linux内核编程五：用户空间与内核空间的交互 -- ioctl</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -212,7 +278,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -225,236 +291,119 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/11/getopt_long_c/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/06/linux_kernel_program4/" class="archive-article-date">
-  	<time datetime="2018-02-06T15:53:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/11/usb_error/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">U盘容量变小的修复办法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/06/linux_kernel_program4/">linux内核编程四：一个简单完整的驱动 -- open|read|write|ioctl</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/06/linux_kernel_program3/" class="archive-article-date">
-  	<time datetime="2018-02-06T15:51:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/06/linux_kernel_program3/">linux内核编程三：模块间调用</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/06/linux_kernel_program2/" class="archive-article-date">
-  	<time datetime="2018-02-06T15:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/06/linux_kernel_program2/">linux内核编程二：参数传递</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/06/linux_kernel_program1/" class="archive-article-date">
-  	<time datetime="2018-02-06T14:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/06/linux_kernel_program1/">linux内核编程一：入门 -- hello kernel</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内核</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/categories/编程/">&laquo; Prev</a><a class="page-number" href="/categories/编程/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2018/03/11/getopt_long_c/",
+  owner: 'myw31415926',
+  repo: 'myw31415926.github.io',
+  oauth: {
+    client_id: '6b0450c89cc2f342a536',
+    client_secret: 'b6c55c88188c2d0122e54bd2aa98d1876fec0e28',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
   
 
 
@@ -478,10 +427,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
